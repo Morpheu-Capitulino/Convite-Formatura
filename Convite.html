@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Presença</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #0c1734;
+      }
+      .container {
+        font-family: "Prata", serif;
+        font-weight: 400;
+        font-style: normal;
+        max-width: 1200px;
+      margin: 30px auto;
+      background-color: #151f3b;
+      border-radius: 25px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    form {
+      background: #151f3b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 400px;
+      margin: 30px;
+    }
+    label {
+      display: block;
+      margin-bottom: 12px;
+      color: white;
+  }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      
+    }
+    .logo {
+      width: 150px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+    button {
+      margin-top: 15px;
+      background-color: #2c6cb3;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+    }
+    .texto {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 600px;
+      margin: 20px;
+      overflow: hidden;
+      font-family: "Prata", serif;
+      font-weight: 400;
+      font-style: normal;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      color: white;
+    }
+    @media (max-width: 1024px) {
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .container {
+    flex-direction: column-reverse;
+    gap: 20px;
+    padding: 0,8rem;
+  }
+
+  .texto {
+    width: 90%;
+    max-width: 380px;
+    height: auto;
+    margin: 20px auto;
+    font-size: 0.85rem;
+    padding: 15px;
+  }
+
+  form {
+    width: 90%;
+    max-width: 380px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .logo {
+    width: 120px;
+    margin-bottom: 15px;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .texto h2 {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input, select {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .texto h2 {
+    font-size: 0.85rem;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="texto">
+      <h2>
+        Agradeço primeiramente a Deus, pois sem Ele nada disso seria possível.
+        À minha esposa, que esteve ao meu lado em todos os momentos, sendo meu alicerce e apoio incondicional para que este sonho se tornasse realidade.
+        Aos meus pais, pelo incentivo constante e pelos ensinamentos que me conduziram até aqui.
+        Ao meu pai Flavio, que me apoiou de todas as formas possíveis e esteve sempre presente ao meu lado.
+        Por fim, a todos os meus familiares e amigos que, de alguma forma, fizeram parte dessa caminhada e contribuíram para que eu chegasse até aqui.
+      </h2>
+    </div>
+
+    <form id="formContato">
+      <img src="imagens/ANDREY_VIEIRA_ENGENHEIRO_CIVIL_2_page-0001-removebg-preview (1).png" alt="Logo" class="logo">
+
+      <label>Seu nome completo:
+        <input type="text" name="nome" required>
+      </label>
+
+      <label>Você irá comparecer?
+      <select name="comparecer" required>
+        <option value="" disabled selected hidden>Selecione uma opção</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+
+      </label>
+
+      <label>Seu email:
+        <input type="email" name="email" placeholder="Seu e-mail" required />
+      </label>
+      <input type="hidden" id="to_email" name="to_email"/>
+
+      <button type="submit">Confirmar Presença</button>
+    </form>
+  </div>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- Script de envio -->
+  <script>
+     emailjs.init("cu2SqEfy7kDa94oB5"); // SEU USER_ID
+
+    const form = document.getElementById('formContato');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const emailConvidado = form.email.value;
+      const comparecer = form.comparecer.value;
+
+      // 1. Envia para você
+      document.getElementById('to_email').value = "andreyrenansv@gmail.com";
+      try {
+        await emailjs.sendForm('service_jqulh8n', 'template_1lry6dx', form);
+        console.log("Email enviado para você");
+      } catch (err) {
+        console.error("Erro para você:", err);
+      }
+
+      // 2. Envia para convidado (se comparecer = Sim)
+      if (comparecer === "Sim") {
+        document.getElementById('to_email').value = emailConvidado;
+        try {
+          await emailjs.sendForm('service_jqulh8n', 'template_h1dowcc', form);
+          console.log("Email enviado para convidado");
+        } catch (err) {
+          console.error("Erro para convidado:", err);
+        }
+      }
+
+      alert("Formulário enviado!");
+      form.reset();
+    });
+
+  </script>
+</body>
+</html>
