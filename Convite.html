@@ -196,6 +196,10 @@
       <button type="submit">Confirmar Presença</button>
     </form>
   </div>
+  <div id="mensagem-sucesso" style="display:none; color:#0f0; text-align:center; margin-top:10px;">
+  ✅ Formulário enviado com sucesso!
+</div>
+
 
   <!-- EmailJS -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -230,10 +234,9 @@
         }
       }
 
-      alert("Formulário enviado!");
-      form.reset();
+    form.reset();
+    document.getElementById("mensagem-sucesso").style.display = "block";
     });
-
   </script>
 </body>
 </html>
