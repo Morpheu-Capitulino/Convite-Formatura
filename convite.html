@@ -174,31 +174,31 @@
 
     <form id="formContato">
       <img src="imagens/ANDREY_VIEIRA_ENGENHEIRO_CIVIL_2_page-0001-removebg-preview (1).png" alt="Logo" class="logo">
-
+      
       <label>Seu nome completo:
         <input type="text" name="nome" required>
       </label>
-
+      
       <label>Você irá comparecer?
-      <select name="comparecer" required>
-        <option value="" disabled selected hidden>Selecione uma opção</option>
-        <option value="Sim">Sim</option>
-        <option value="Não">Não</option>
-      </select>
-
+        <select name="comparecer" required>
+          <option value="" disabled selected hidden>Selecione uma opção</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+        
       </label>
-
+      
       <label>Seu email:
         <input type="email" name="email" placeholder="Seu e-mail" required />
       </label>
       <input type="hidden" id="to_email" name="to_email"/>
-
+      
       <button type="submit">Confirmar Presença</button>
+      <div id="mensagem-sucesso" style="display:none; color:#0f0; text-align:center; margin-top:10px;">
+      ✅ Formulário enviado com sucesso!
+    </div>
     </form>
   </div>
-  <div id="mensagem-sucesso" style="display:none; color:#0f0; text-align:center; margin-top:10px;">
-  ✅ Formulário enviado com sucesso!
-</div>
 
 
   <!-- EmailJS -->
